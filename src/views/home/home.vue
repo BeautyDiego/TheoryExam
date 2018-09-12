@@ -1,0 +1,112 @@
+<template>
+  <div>
+    <div class="top-banner">
+      <div class="main-container">
+        <img src="./../../images/banner.png" width="100%">
+      </div>
+    </div>
+    <div class="main-container">
+      <Row class="subject-choose">
+        <Col span="12"  class="subject-item" :class="choosedSubject==1&&'choosed'" >
+          <div @click="changeSubject(1)">
+            科目一
+          </div>
+        </Col>
+        <Col span="12"  class="subject-item" :class="choosedSubject==4&&'choosed'">
+          <div @click="changeSubject(4)">
+            科目四
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col span="6" v-for="(item,index) in subjectList" :key="index" class="subject-warapper">
+          <subject-item :bgClass = "item.bgClass"
+                        :subjectName = "item.subjectName"
+                        :choosedSubject = "choosedSubject"
+                        ></subject-item>
+        </Col>
+      </Row>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import subjectItem from './../my-components/subject-item.vue'
+export default {
+  name: 'home',
+  components:{
+    subjectItem
+  },
+  data () {
+    return {
+      subjectList: [
+        {
+          bgClass:'free-trial',
+          subjectName:'免费试学'
+        },
+        {
+          bgClass:'photo-basic',
+          subjectName:'图片基础知识'
+        },{
+          bgClass:'keyword',
+          subjectName:'关键字题'
+        },{
+          bgClass:'technique',
+          subjectName:'答题技巧'
+        },{
+          bgClass:'simplify',
+          subjectName:'精简题'
+        },{
+          bgClass:'normal-exercise',
+          subjectName:'常规练习'
+        },{
+          bgClass:'deepen-memory',
+          subjectName:'加深记忆'
+        },{
+          bgClass:'mock-exam',
+          subjectName:'模拟考试'
+        }]
+    }
+  },
+  computed: {
+    ...mapState({
+      'choosedSubject': state => state.app.choosedSubject
+    }),
+  },
+  mounted () {
+  
+  },
+  methods:{
+    changeSubject(subjectIndex){
+      this.$store.commit('setCurrentSubject',subjectIndex);
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="less">
+  .top-banner{
+    background-color: #a8b5ef;
+  }
+  .subject-choose{
+    margin:15px 25px 0;
+    font-size: 24px;
+    line-height: 50px;
+    color: #7088ef;
+    border:1px solid #f5f9ff;
+    .choosed{
+      background-color: #e5e9fd;
+      color: #a1a4af;
+    }
+    .subject-item{
+      cursor:pointer;
+    }
+  }
+  .subject-warapper{
+    text-align: center;
+    text-align: -webkit-center;
+    padding-top:40px;
+  }
+</style>
