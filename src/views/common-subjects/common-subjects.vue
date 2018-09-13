@@ -15,7 +15,7 @@
       </div>
       <div class="subject-main" v-if="questionList.length>0&&currentQuestion">
         <p class="subject-type">{{currentQuestion.QuesTypeText}}题，请选择正确答案！</p>
-        <p class="subject-content">{{currentQuestionIndex}}、{{currentQuestion.Question}}</p>
+        <p class="subject-content" v-html="currentQuestionIndex+'、'+currentQuestionStem"></p>
         <div >
           <Row>
             <Col span="14">
@@ -91,14 +91,15 @@
               </slot>
             </div>
           </collapse-transition>
-          <div class="detailed-explan-title">
-            <div>详情</div>
-          </div>
+        
           <collapse-transition>
             <div class="collapse-wrap"
                  v-show="IsExplanOpen">
               <!-- @slot default -->
               <slot>
+                <div class="detailed-explan-title">
+                  <div>讲解</div>
+                </div>
                 <p  class="detailed-explan" v-html="currentQuestion.Explain">
                 
                 </p>
@@ -172,6 +173,18 @@ export default {
     isVideo:function () {
       const reg = /.+.mp4/;
       return reg.test(this.currentImgUrl)
+    },
+    currentQuestionStem:function () {
+      if (this.currentQuestion.Question){
+        if (this.currentQuestion.IsKey===1){
+          const keyword = this.currentQuestion.KeyText;
+          let re = eval(`/${keyword}/g`);
+          return this.currentQuestion.Question.replace(re,`<span style="color:#ff4d3b;font-size:30px;font-weight:bold;">${keyword}</span>`)
+        }
+        return this.currentQuestion.Question;
+      }else{
+        return ''
+      }
     },
     answerOptionClass:function () {
        return function (option) {
@@ -326,6 +339,9 @@ export default {
        
         }
       }
+    },
+    QuestionQuestionFormat(){
+    
     },
     answerItemColorFormat(index,answer){
       let bgColorClass='';

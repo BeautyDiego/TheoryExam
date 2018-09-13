@@ -90,14 +90,14 @@
               </slot>
             </div>
           </collapse-transition>
-          <div class="detailed-explan-title">
-            <div>详情</div>
-          </div>
           <collapse-transition>
             <div class="collapse-wrap"
                  v-show="IsExplanOpen">
               <!-- @slot default -->
               <slot>
+                <div class="detailed-explan-title">
+                  <div>讲解</div>
+                </div>
                 <p  class="detailed-explan" v-html="currentQuestion.Explain">
           
                 </p>

@@ -80,7 +80,7 @@
           </Row>
         </div>
         <div class="subject-explanation">
-          <div class="detailed-explan-title">
+          <div class="detailed-explan-title" v-show="IsExplanOpen">
             <p class="answer-judgement" v-show="currentAnswer.IsAnswered">
               <span class="success-color" v-show="currentAnswer.IsCorrect">回答正确！</span>
               <span v-show="!currentAnswer.IsCorrect" class="error-color">回答错误！</span>
