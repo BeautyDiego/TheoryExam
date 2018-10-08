@@ -72,8 +72,8 @@ export default {
       btnLoading:false,
       isLoging:false,
       loginForm:{
-        mobile: '18627774450',
-        password: '123456',
+        mobile: '',
+        password: '',
         login_type:2
       }
     }
@@ -118,6 +118,7 @@ export default {
           this.isLoading=true;
           this.$Loading.start();
           let result = await login(params);
+          console.log(result)
           if (result.status ===0) {
             this.isLoading=false;
             this.$Loading.finish();
@@ -130,7 +131,7 @@ export default {
           }else{
             this.isLoading=false;
             this.$Loading.error();
-            this.$Message.error("服务器异常,稍后再试");
+            this.$Message.error(result.msg);
           }
 
         } else {

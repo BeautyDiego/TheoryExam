@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div >
+    
+  </style>
     <div class="top-banner">
-      <div class="main-container">
-        <img src="./../../images/banner.png" width="100%">
+      <div style="width:1200px;height:180px;margin:0 auto;align-items:center;justify-content:center;display:flex;">
+        
+        <img src="./../../images/xc_l.png"  style="width:300px;" >
+        <img src="./../../images/logo_r.png"  style="width:150px;margin:15px 0px 10px 450px;">
       </div>
     </div>
     <div class="main-container">
@@ -18,7 +22,7 @@
           </div>
         </Col>
       </Row>
-      <Row>
+      <Row >
         <Col span="6" v-for="(item,index) in subjectList" :key="index" class="subject-warapper">
           <subject-item :bgClass = "item.bgClass"
                         :subjectName = "item.subjectName"
@@ -91,6 +95,7 @@ export default {
     background-color: #a8b5ef;
   }
   .subject-choose{
+    top:-5px;
     margin:15px 25px 0;
     font-size: 24px;
     line-height: 50px;
@@ -109,4 +114,5 @@ export default {
     text-align: -webkit-center;
     padding-top:40px;
   }
+
 </style>

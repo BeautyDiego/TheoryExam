@@ -34,29 +34,30 @@ class httpRequest {
 
     // 添加响应拦截器
     instance.interceptors.response.use((res) => {
-      let { data } = res
       const is = this.destroy(url)
       if (!is) {
         setTimeout(() => {
           // Spin.hide()
         }, 500)
       }
-      if (data.status !== 0) {
-        return false
-      }
-      return data
+      //console.log(res)
+      //if (res.data.status !== 0) {
+       // return false
+      //}
+      return res.data
     }, (error) => {
       let message='服务内部错误';
+
       switch (error.response.status) {
         case 400:
           message = '请求错误'
           break
 
         case 401:
-          message = '未授权，请重新登录'
+          message = '需要VIP权限才能继续访问';
           setTimeout(function(){
-            sessionStorage.clear()
-            window.location='/'; },
+            window.location='/'; 
+          },
             500);
 
           break

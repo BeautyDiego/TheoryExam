@@ -33,8 +33,10 @@ export default {
   methods:{
     routeTo(){
       if (this.bgClass==='free-trial'){
+        console.log(sessionStorage)
         this.$router.push({path:'/free-questions',query:{choosedSubject:this.choosedSubject}});
       }else if (this.bgClass==='photo-basic'){
+        
         this.$router.push({path:'/photo-basic-skills'});
       }else if (this.bgClass==='mock-exam'){
         this.$router.push({path:'/mock-exam',query:{choosedSubject:this.choosedSubject}});
@@ -50,8 +52,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .subject-btn{
-  width: 240px;
-  height: 240px;
+  width: 150px;
+  height: 150px;
   background-color: #f5f9ff;
   border-radius: 10px;
   cursor:pointer;
@@ -62,17 +64,18 @@ export default {
     background-color: #f1f1f1;
   }
   h3{
-    font-size: 24px;
-    font-weight: normal;
+    font-size: 20px;
+    font-weight: bold;
     font-stretch: normal;
     line-height: 64px;
     color: #a1a4af;
     position:relative;
-    top:170px;
+    top:-48px;
   }
 }
 .photo-basic{
   background-image:url(./../../images/photo-basic.png);
+background-repeat:no-repeat; background-size:100% 77%;
 }
 .keyword{
   background-image:url(./../../images/keyword.png);
