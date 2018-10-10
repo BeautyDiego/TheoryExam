@@ -32,7 +32,7 @@
               </div>
             </Col>
             <Col span="10">
-              <img v-if="!isVideo&&currentImgUrl" :src="currentImgUrl" alt="" height="220px">
+              <img v-if="!isVideo&&currentImgUrl" :src="currentImgUrl" alt=""  style="max-height:200px;max-width:100%;">
               <video v-if="isVideo" :src="currentImgUrl" autoplay loop></video>
             </Col>
 
@@ -631,10 +631,11 @@ export default {
     background-color: #eeeeee;
   }
   .answer-list {
-    height: 300px;
+    height: auto;
+    padding-bottom:10px;
     ul {
       list-style: none;
-      padding: 20px 28px 40px;
+      padding: 20px 28px 10px;
       li {
         text-align: left;
         padding: 5px 0;
@@ -657,7 +658,7 @@ export default {
     padding: 0 28px;
   }
   .subject-explanation {
-    padding: 50px 0;
+    padding: 30px 0;
     .answer-sheet-wrapper {
       overflow-y: scroll;
       width: 900px;

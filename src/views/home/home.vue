@@ -112,6 +112,7 @@ export default {
   .subject-warapper{
     text-align: center;
     text-align: -webkit-center;
+    text-align: -moz-center;
     padding-top:40px;
   }
 
