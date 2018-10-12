@@ -98,4 +98,14 @@ background-repeat:no-repeat; background-size:100% 77%;
 .free-trial{
   background-image:url(./../../images/free-trial.png);
 }
+.single-choice{
+  background-image:url(./../../images/single-choice.png);
+}
+.multi-choice{
+  background-image:url(./../../images/multi-choice.png);
+}
+.judge{
+  background-image:url(./../../images/judge.png);
+}
+
 </style>
