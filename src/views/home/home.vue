@@ -23,7 +23,7 @@
         </Col>
       </Row>
       <Row >
-        <Col span="6" v-for="(item,index) in subjectList" :key="index" class="subject-warapper">
+        <Col span="6" v-for="(item,index) in subList" :key="index" class="subject-warapper">
           <subject-item :bgClass = "item.bgClass"
                         :subjectName = "item.subjectName"
                         :choosedSubject = "choosedSubject"
@@ -44,6 +44,7 @@ export default {
   },
   data () {
     return {
+      subList:[],
       subjectList: [
         {
           bgClass:'free-trial',
@@ -54,7 +55,10 @@ export default {
           subjectName:'图片基础知识'
         },{
           bgClass:'keyword',
-          subjectName:'关键字题'
+          subjectName:'判断题'
+        },{
+          bgClass:'deepen-memory',
+          subjectName:'单选题'
         },{
           bgClass:'technique',
           subjectName:'答题技巧'
@@ -65,8 +69,32 @@ export default {
           bgClass:'normal-exercise',
           subjectName:'常规练习'
         },{
+          bgClass:'mock-exam',
+          subjectName:'模拟考试'
+        }],
+         subjectList2: [
+        {
+          bgClass:'free-trial',
+          subjectName:'免费试学'
+        },
+        {
+          bgClass:'photo-basic',
+          subjectName:'多选题'
+        },{
+          bgClass:'keyword',
+          subjectName:'判断题'
+        },{
           bgClass:'deepen-memory',
-          subjectName:'加深记忆'
+          subjectName:'单选题'
+        },{
+          bgClass:'technique',
+          subjectName:'答题技巧'
+        },{
+          bgClass:'simplify',
+          subjectName:'精简题'
+        },{
+          bgClass:'normal-exercise',
+          subjectName:'常规练习'
         },{
           bgClass:'mock-exam',
           subjectName:'模拟考试'
@@ -79,10 +107,14 @@ export default {
     }),
   },
   mounted () {
-  
+    this.subList=this.subjectList;
   },
   methods:{
     changeSubject(subjectIndex){
+      if(subjectIndex==1)
+         this.subList=this.subjectList;
+      else if(subjectIndex==4)
+        this.subList=this.subjectList2;
       this.$store.commit('setCurrentSubject',subjectIndex);
     }
   }
