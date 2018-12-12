@@ -37,9 +37,6 @@
             </Col>
       
           </Row>
-    
-    
-    
         </div>
         <div class="user-operate">
           <Row>
@@ -223,7 +220,7 @@ export default {
       for (let j=0;j< this.totalCount;j++){
         this.answerList.push({subIndex:j,cusAnswer:'',IsAnswered:false,IsCorrect:true});
       }
-      this.currentQuestion =   this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
+       this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
       setTimeout(() => {
         this.$Spin.hide();
       }, 600);
@@ -231,21 +228,21 @@ export default {
     preQuestion(){
       if (this.currentQuestionIndex>1){
         this.currentQuestionIndex--;
-        this.currentQuestion =   this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
+         this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
         this.resetAudioToPause();//重置音频播放按钮
       }
     },
     nextQuestion(){
       if (this.currentQuestionIndex!==this.totalCount){
         this.currentQuestionIndex++;
-        this.currentQuestion =   this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
+          this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
         this.resetAudioToPause();//重置音频播放按钮
       }
     },
     turnTo(index){
       if (index!==this.currentQuestionIndex){
         this.currentQuestionIndex=index;
-        this.currentQuestion =   this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
+     this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
         this.resetAudioToPause();//重置音频播放按钮
       }
     },
