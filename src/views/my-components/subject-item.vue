@@ -68,7 +68,7 @@ export default {
     font-weight: bold;
     font-stretch: normal;
     line-height: 64px;
-    color: #a1a4af;
+    color: #323233;
     position:relative;
     top:-48px;
   }

@@ -620,7 +620,7 @@ export default {
     font-size: 16px;
     line-height: 25px;
     letter-spacing: 1px;
-    color: #bcbcbc;
+    color: #6f6e6e;
   }
   .subject-content {
     padding: 20px 28px;
@@ -640,7 +640,7 @@ export default {
         text-align: left;
         padding: 5px 0;
         font-size: 18px;
-        color: #9c9c9c;
+        color: #656464;
         p {
           line-height: 30px;
           padding-left: 30px;
@@ -670,7 +670,7 @@ export default {
     .answer-sheet {
       border-left: 1px solid #e9e9e9;
       border-top: 1px solid #e9e9e9;
-      color: #888688;
+      color: #464446;
       .answer-item {
         display: inline-block;
         width: 4%;

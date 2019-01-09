@@ -145,7 +145,7 @@ export default {
   border: 1px solid #f5f9ff;
   .choosed {
     background-color: #e5e9fd;
-    color: #a1a4af;
+    color: #323233;
   }
   .subject-item {
     cursor: pointer;
