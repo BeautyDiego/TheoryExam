@@ -20,8 +20,8 @@
         </Row>
       </div>
       <div class="subject-main" v-if="questionList.length>0">
-        <p class="subject-type">{{currentQuestion.QuesTypeText}}题，请选择正确答案！</p>
-        <p class="subject-content">{{currentQuestionIndex}}、{{currentQuestion.Question}}</p>
+        <p class="subject-type" >{{currentQuestion.QuesTypeText}}题，请选择正确答案！</p>
+        <p class="subject-content" :class="currentQuestion.QuesTypeText=='多选'?'error-color':''">{{currentQuestionIndex}}、{{currentQuestion.Question}}</p>
         <div >
           <Row>
             <Col span="14">
@@ -96,8 +96,15 @@
             <div class="answer-sheet" v-show="IsAnswerSheetOpen">
               <div v-for="(item,index) in answerList"
                    class="answer-item"
+                   :key="index"
                    :class="answerItemColorFormat(index+1,item)"
-                   @click="turnTo(index+1)">{{index+1}}</div>
+                   @click="turnTo(index+1)">
+                    <div v-show="!item.IsAnswered"> {{index+1}}</div>   
+                    <div v-show="item.IsAnswered" style="position:absolute;top:0;width:100%;height:100%;">
+                      <Icon :type="item.showRightOrError?'md-checkmark':'md-close'" size="28"  style="position:absolute;top:0;left:0;bottom:0;right:0;" />
+                    </div>
+                 
+                   </div>
             </div>
           </div>
          
@@ -183,7 +190,7 @@ export default {
     }),
     finalScore:function () {
       if (this.totalCount>0){
-       return (this.correctCount/this.totalCount)*100;
+       return parseInt((this.correctCount/this.totalCount)*100);
       }else{
         return 0;
       }
@@ -276,7 +283,7 @@ export default {
       this.questionList=res.data;
       this.totalCount =  this.questionList.length;
       for (let j=0;j< this.totalCount;j++){
-        this.answerList.push({subIndex:j,cusAnswer:'',IsAnswered:false,IsCorrect:true});
+        this.answerList.push({subIndex:j,cusAnswer:'',IsAnswered:false,IsCorrect:true,showRightOrError:true});
       }
       this.currentQuestion =   this.currentQuestion=this.questionList[this.currentQuestionIndex-1];
     },
@@ -311,6 +318,14 @@ export default {
           this.answerList[this.currentQuestionIndex-1].IsAnswered = true;
           //回答以后的统计
           this.currentQuestion.Answer === option?this.correctCount++:this.errorCount++
+          //回答以后判断答题卡显示勾叉
+          var showRightOrErrorVal = '';
+          if (this.currentQuestion.QuesTypeText !== '判断') {
+            showRightOrErrorVal =  this.currentQuestion.Answer === option;
+          }else{
+            showRightOrErrorVal = this.currentQuestion.Answer=='A';
+          }
+          this.answerList[this.currentQuestionIndex-1].showRightOrError = showRightOrErrorVal;
           if(this.currentQuestion.Answer === option){ //回答正确到下一题
             let vm=this;
             setTimeout(function () {
@@ -326,13 +341,15 @@ export default {
     },
     //提交多选的答案
     submitAnswers(){
-      if(this.currentQuestion.QuesTypeText==='多选'){
+      if(this.currentQuestion.QuesTypeText==='多选'&&!this.currentAnswer.IsAnswered){
         let cusAnswer=this.currentAnswer.cusAnswer.substring(0,this.currentAnswer.cusAnswer.length - 1).split(',');
         let subjectAnswer = this.currentQuestion.Answer.split(',');
         this.answerList[this.currentQuestionIndex-1].IsCorrect = cusAnswer.sort().toString() === subjectAnswer.sort().toString();
         this.answerList[this.currentQuestionIndex-1].IsAnswered = true;
         //回答以后的统计
         this.answerList[this.currentQuestionIndex-1].IsCorrect?this.correctCount++:this.errorCount++
+         //回答以后判断答题卡显示勾叉
+        this.answerList[this.currentQuestionIndex-1].showRightOrError = cusAnswer.sort().toString() === subjectAnswer.sort().toString();
         if( this.answerList[this.currentQuestionIndex-1].IsCorrect){ //回答正确到下一题
           let vm=this;
           setTimeout(function () {
@@ -457,7 +474,7 @@ export default {
 <style scoped lang="less">
 @import "./../../assets/styles/common";
 .error-color{
-  color:@error-color
+  color:@error-color !important
 }
 .correct-color{
   color:@success-color
@@ -563,8 +580,10 @@ export default {
         overflow: hidden;
         color:#464446;
         .answer-item{
-          display:inline-block;
+          float:left;
+          position:relative;
           width: 4%;
+          height: 30px;
           line-height: 30px;
           border-right: 1px solid #e9e9e9;
           border-bottom: 1px solid #e9e9e9;

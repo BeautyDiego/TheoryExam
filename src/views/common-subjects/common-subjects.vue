@@ -459,7 +459,7 @@ export default {
     },
     //提交多选的答案
     submitAnswers() {
-      if (this.currentQuestion.QuesTypeText === "多选") {
+      if (this.currentQuestion.QuesTypeText==='多选'&&!this.currentAnswer.IsAnswered) {
         let cusAnswer = this.currentAnswer.cusAnswer
           .substring(0, this.currentAnswer.cusAnswer.length - 1)
           .split(",");
